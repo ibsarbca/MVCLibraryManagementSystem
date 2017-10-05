@@ -1,0 +1,86 @@
+﻿@model IEnumerable<MVCLibraryManagementSystem.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div class="row">
+    <div class="col-md-4">
+        <div class="input-group">
+            <input type="text" class="form-control" name="search" />
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary">GO</button>
+            </span>
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Item.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Item.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Item.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BookId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BookId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BookId })
+        </td>
+    </tr>
+}
+
+</table>
+    <ul class="pagination">
+        <li><a href="#">&laquo;</a></li>
+        <li><a href="Index?page=1">1</a></li>
+        <li><a href="Index?page=2">2</a></li>
+        <li><a href="Books/Index?page=3">3</a></li>
+        <li><a href="Books/Index?page=4">4</a></li>
+        <li><a href="Books/Index?page=5">5</a></li>
+        <li><a href="Books/Index?page=6">6</a></li>
+        <li><a href="Books/Index?page=7">7</a></li>
+        <li><a href="Books/Index?page=8">8</a></li>
+        <li><a href="Books/Index?page=9">9</a></li>
+        <li><a href="Books/Index?page=10">10</a></li>
+        <li><a href="Books/Index?page=11">11</a></li>
+        <li><a href="Books/Index?page=12">12</a></li>
+        <li><a href="Books/Index?page=13">13</a></li>
+        <li><a href="Books/Index?page=14">14</a></li>
+        <li><a href="Books/Index?page=15">15</a></li>
+        <li><a href="Books/Index?page=16">16</a></li>
+        <li><a href="Books/Index?page=17">17</a></li>
+        <li><a href="Books/Index?page=18">18</a></li>
+        <li><a href="Books/Index?page=19">19</a></li>
+        <li><a href="Books/Index?page=20">20</a></li>
+        <li><a href="#">&raquo;</a></li>
+    </ul>
+

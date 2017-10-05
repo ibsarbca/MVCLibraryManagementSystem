@@ -1,0 +1,34 @@
+﻿@model MVCLibraryManagementSystem.Models.IssuedItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>IssuedItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LateFeePerDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LateFeePerDay)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IssuedItemId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

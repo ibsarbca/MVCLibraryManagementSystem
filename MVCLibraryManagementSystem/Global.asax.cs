@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using MVCLibraryManagementSystem.App_Start;
 
 namespace MVCLibraryManagementSystem
 {
@@ -13,6 +14,7 @@ namespace MVCLibraryManagementSystem
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            AutoMapperConfig.MapViewModelsToModels();
         }
     }
 }

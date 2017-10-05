@@ -1,0 +1,49 @@
+﻿@model MVCLibraryManagementSystem.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Item.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Item.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item.Year)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BookId }) |
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink("Add Copy", "Create", "AccessionRecords", new { itemid = Model.Item.ItemId }, null)
+</p>
