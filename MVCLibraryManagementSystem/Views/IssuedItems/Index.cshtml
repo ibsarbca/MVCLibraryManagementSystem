@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVCLibraryManagementSystem.Models.IssuedItem>
+﻿@model List<MVCLibraryManagementSystem.Models.IssuedItem>
 
 @{
     ViewBag.Title = "Index";
@@ -12,26 +12,45 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.IssueDate)
+            @Html.DisplayNameFor(model => model.First().AccessionRecord.Item.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LateFeePerDay)
+            @Html.DisplayNameFor(model => model.First().IssueDate)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().AccessionRecord.AccessionRecordId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Member)
+        </th>
+     
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
+    
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccessionRecord.Item.Title)
+        </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.IssueDate)
         </td>
+        
         <td>
-            @Html.DisplayFor(modelItem => item.LateFeePerDay)
+            @Html.DisplayFor(modelItem => item.Member)
         </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.AccessionRecord.AccessionRecordId)
+        </td>
+
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.IssuedItemId }) |
             @Html.ActionLink("Details", "Details", new { id=item.IssuedItemId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.IssuedItemId })
+            
         </td>
     </tr>
 }
