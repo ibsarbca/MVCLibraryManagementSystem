@@ -5,9 +5,9 @@
 }
 
 <h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <!--@Html.ActionLink("Issue Item", "")-->
+    @Html.ActionLink("Issue Item" ,"Index", "Books")
 </p>
 <table class="table">
     <tr>
@@ -22,6 +22,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.First().Member)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().LateFeePerDay)
         </th>
      
         <th></th>
@@ -44,6 +47,10 @@
         
         <td>
             @Html.DisplayFor(modelItem => item.AccessionRecord.AccessionRecordId)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.LateFeePerDay)
         </td>
 
         <td>

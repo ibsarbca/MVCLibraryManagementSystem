@@ -46,5 +46,5 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.BookId }) |
     @Html.ActionLink("Back to List", "Index") |
     @Html.ActionLink("Add Copy", "Create", "AccessionRecords", new { itemid = Model.Item.ItemId }, null) |
-    <a href="IssuedItems/Create">Issue Item</a>
+    <a href="/IssuedItems/Create?ItemId=@Model.Item.ItemId">Issue Item</a>
 </p>
