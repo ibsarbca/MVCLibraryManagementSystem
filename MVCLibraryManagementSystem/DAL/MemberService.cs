@@ -8,6 +8,12 @@ namespace MVCLibraryManagementSystem.DAL
     public class MemberService : IMemberService
     {
         private LibraryContext dbcontext = new LibraryContext();
+
+        public MemberService()
+        {
+            this.dbcontext = new LibraryContext();
+        }
+
         public MemberService(LibraryContext ctx)
         {
             this.dbcontext = ctx;
