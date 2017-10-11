@@ -84,11 +84,10 @@ namespace MVCLibraryManagementSystem.Controllers
         }
 
         // GET: IssuedItems/Create
-        public ActionResult Create(int? itemid)
+        public ActionResult Create(int itemid)
         {
             IssuedItem newRecord = new IssuedItem();
-            int id = itemid ?? -1;
-            newRecord.AccessionRecord = service.GetRandomIssuableAccRecord(id);
+            newRecord.AccessionRecord = service.GetRandomIssuableAccRecord(itemid);
             newRecord.IssueDate = DateTime.Now.Date;
             newRecord.IsReturned = false;
             return View(newRecord);
@@ -99,13 +98,18 @@ namespace MVCLibraryManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IssuedItemId,IssueDate,LateFeePerDay")] IssuedItem issuedItem)
+        public ActionResult Create([Bind(Include = "IssuedItemId,IssueDate,LateFeePerDay,Member")] IssuedItem issuedItem)
         {
             if (ModelState.IsValid)
             {
-             
-
-                return RedirectToAction("Index");
+                if(memberService.GetMemberById(issuedItem.Member.MemberId) == null)
+                {
+                    ModelState.AddModelError("Member", "The Member ID does not exist.");
+                } else
+                {
+                    service.Add(issuedItem);
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(issuedItem);
