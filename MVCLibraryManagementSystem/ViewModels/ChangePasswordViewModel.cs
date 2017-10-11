@@ -19,7 +19,7 @@ namespace MVCLibraryManagementSystem.ViewModels
 
         [Required]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Both passwords must match")]
+        [Compare("Password", ErrorMessage = "Both passwords must match.")]
         public string ConfirmPassword { get; set; }
 
     }

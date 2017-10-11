@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCLibraryManagementSystem", "MVCLibraryManagementSystem\MVCLibraryManagementSystem.csproj", "{04DD33D6-7A9D-406A-92C4-D4FB03961AB9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCLibraryManagementSystem", "MVCLibraryManagementSystem\MVCLibraryManagementSystem.csproj", "{04DD33D6-7A9D-406A-92C4-D4FB03961AB9}")
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCLibraryManagementSystem.Tests", "MVCLibraryManagementSystem.Tests\MVCLibraryManagementSystem.Tests.csproj", "{3B855361-5CBE-4C6A-81B0-B27F89879D03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCLibraryManagementSystem.Tests", "MVCLibraryManagementSystem.Tests\MVCLibraryManagementSystem.Tests.csproj", "{3B855361-5CBE-4C6A-81B0-B27F89879D03}")
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
