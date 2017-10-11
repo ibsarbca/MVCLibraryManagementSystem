@@ -132,8 +132,8 @@ namespace MVCLibraryManagementSystem.Tests
             IssuedItem facultyItem = new IssuedItem() { AccessionRecord = accessionRecords[0], IssuedItemId = 22, Member = facultyMember };
 
             dynamic service = new IssuedItemService(accRecMock.Object);
-            DateTime returnDateStudent = service.GetDueDate(studentItem).ToString("dd/MM/yyyy");
-            DateTime returnDateFaculty = service.GetDueDate(facultyItem).ToString("dd/MM/yyyy");
+            DateTime returnDateStudent = service.GetDueDate(studentItem);
+            DateTime returnDateFaculty = service.GetDueDate(facultyItem);
 
             // Student due date should be 7 days from today.
             Assert.IsTrue(returnDateStudent.Subtract(studentItem.IssueDate).Days == 7);
@@ -146,15 +146,27 @@ namespace MVCLibraryManagementSystem.Tests
         public void TestGetLateFee()
         {
             int lateFee = 5;
-            
-            IssuedItem someItem = new IssuedItem() { AccessionRecord = accessionRecords[0], IssuedItemId = 21, Member = member, LateFeePerDay = lateFee};
+            Member studentMember = new Member() { MemberType = MEMBERTYPE.STUDENT };
+
+            DateTime tenDaysAgo = DateTime.Now.Subtract(TimeSpan.FromDays(10));
+            IssuedItem someItem = new IssuedItem() {
+                AccessionRecord = accessionRecords[0],
+                IssuedItemId = 21,
+                Member = studentMember,
+                LateFeePerDay = lateFee,
+                IssueDate = tenDaysAgo
+                // Setting the issueDate to 10 days ago makes the number of late days to be
+                // 3 for a student member.
+            };
+
             
             dynamic service = new IssuedItemService(accRecMock.Object);
-            DateTime returnDateStudent = service.GetDueDate(someItem).ToString("dd/MM/yyyy");
 
-            DateTime tenDaysLate = returnDateStudent.Add(TimeSpan.FromDays(10));
+            // Number of days from due date that have passed i.e. how may days ago
+            // was the due date
+            int lateDays = DateTime.Now.Subtract(service.GetDueDate(someItem)).Days;
 
-            Assert.IsTrue(service.GetLateFee(someItem) == lateFee * 10);
+            Assert.AreEqual(lateFee * lateDays, service.GetLateFee(someItem));
         }
 
     }
