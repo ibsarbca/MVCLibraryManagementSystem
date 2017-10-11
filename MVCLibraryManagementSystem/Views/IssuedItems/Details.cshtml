@@ -11,17 +11,50 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.AccessionRecord.Item.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccessionRecord.Item.Title)
+        </dd>
+        
+        <dt>
             @Html.DisplayNameFor(model => model.IssueDate)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.IssueDate)
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.AccessionRecord.Item)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccessionRecord.AccessionRecordId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Member.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Member.Name )
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Member.MemberId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Member.MemberId )
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Member.MemberType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Member.MemberType)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.LateFeePerDay)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.LateFeePerDay)
         </dd>
