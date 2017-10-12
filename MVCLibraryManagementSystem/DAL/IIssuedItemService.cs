@@ -28,5 +28,20 @@ namespace MVCLibraryManagementSystem.DAL
         /// <param name="itemid">Item ID of the Item you want to return an Accession Record for</param>
         /// <returns></returns>
         AccessionRecord GetRandomIssuableAccRecord(int itemid);
+
+        /// <summary>
+        /// Gets the calculated due date for the issuedItem according to the MEMBERTYPE that 
+        /// issued the item
+        /// </summary>
+        /// <param name="issuedItem">The Issued Item to get the due date for.</param>
+        /// <returns>90 if MEMBERTYPE == FACULTY, 7 if MEMBERTYPE == STUDENT</returns>
+        DateTime GetDueDate(IssuedItem issuedItem);
+
+        /// <summary>
+        /// Gets the calculated late fee according to the due date of the issued item.
+        /// </summary>
+        /// <param name="issuedItem">Issued Item to get the due date for.</param>
+        /// <returns>The late fee owed.</returns>
+        int GetLateFee(IssuedItem issuedItem);
     }
 }
