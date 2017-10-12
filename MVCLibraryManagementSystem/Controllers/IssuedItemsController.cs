@@ -105,7 +105,8 @@ namespace MVCLibraryManagementSystem.Controllers
                 if(memberService.GetMemberById(issuedItem.Member.MemberId) == null)
                 {
                     ModelState.AddModelError("Member", "The Member ID does not exist.");
-                } else
+                }
+                else
                 {
                     service.Add(issuedItem);
                     return RedirectToAction("Index");
@@ -135,6 +136,7 @@ namespace MVCLibraryManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [System.Obsolete("As of 12/10/17, the edit method is not being used. Instead, the Details method is being used to edit properties.")]
         public ActionResult Edit([Bind(Include = "IssuedItemId,IssueDate,LateFeePerDay")] IssuedItem issuedItem)
         {
             if (ModelState.IsValid)
@@ -174,16 +176,33 @@ namespace MVCLibraryManagementSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SetReturned()
+        public ActionResult SetReturned(int id)
         {
-            return View();
+            IssuedItem issuedItem = service.GetById(id);
+            issuedItem.IsReturned = true;
+            service.Update(issuedItem);
+
+            return RedirectToAction("Details", new { id = issuedItem.IssuedItemId });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SetDateReturned()
+        public ActionResult SetDateReturned(int id)
         {
-            return View();
+            IssuedItem issuedItem = service.GetById(id);
+            issuedItem.DateReturned = service.GetDueDate(issuedItem);
+            service.Update(issuedItem);
+
+            return RedirectToAction("Details", new { id = issuedItem.IssuedItemId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetLateFeePaid(int id)
+        {
+            IssuedItem issuedItem = service.GetById(id);
+            issuedItem.IsLateFeePaid = true;
+            return RedirectToAction("Details", new { id = issuedItem.IssuedItemId });
         }
 
         protected override void Dispose(bool disposing)

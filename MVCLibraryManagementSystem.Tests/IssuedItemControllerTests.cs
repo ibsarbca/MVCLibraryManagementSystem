@@ -49,7 +49,6 @@ namespace MVCLibraryManagementSystem.Tests
             issuedItems[3].IsReturned = false;
             mock.Setup(m => m.GetAllIssuedItems()).Returns(issuedItems);
             mock.Setup(m => m.GetRandomIssuableAccRecord(It.IsAny<int>())).Returns(accessionRecords[0]);
-            //memberMock.Setup(m => m.GetMemberById(It.IsAny<int>())).Returns();
             
         }
 
@@ -98,7 +97,8 @@ viewResult.Model;
         {
             // Set up a fake GetRandomIssuableAccRecord() and make sure it's called.
             // smock.Setup(m => m.GetRandomIssuableAccRecord()).Returns(accessionRecords[0]);
-            var controller = new IssuedItemsController(mock.Object);
+            memberMock.Setup(m => m.GetMemberById(It.IsAny<int>())).Returns(member);
+            var controller = new IssuedItemsController(mock.Object, memberMock.Object);
             IssuedItem toAdd = new IssuedItem { AccessionRecord = accessionRecords[0], Member = member, IssuedItemId = 15, IssueDate = DateTime.Now.Date };
 
             controller.Create(toAdd);
@@ -133,6 +133,8 @@ viewResult.Model;
         [TestMethod]
         public void TestCreateChecksMemberId()
         {
+            //var memberServiceMock = new Mock<IMemberService>();
+
             dynamic controller = new IssuedItemsController(mock.Object, memberMock.Object);
 
             IssuedItem itemToValidate = new IssuedItem()
@@ -187,24 +189,14 @@ viewResult.Model;
         [TestMethod]
         public void TestEditHasProperModel()
         {
-            dynamic controller = new IssuedItemsController(mock.Object);
-            var viewResult = controller.Edit(id: 1) as ViewResult;
-
-            var model = viewResult.Model as IssuedItem;
-            Assert.IsNotNull(model.AccessionRecord);
-            Assert.IsNotNull(model.Member);
-            Assert.IsNotNull(model.IssueDate);
+            // Please see the Edit method, Obsolete Attribute.
         }
 
 
         [TestMethod]
         public void TestEditCallsUpdate()
         {
-            dynamic controller = new IssuedItemsController(mock.Object);
-            mock.Setup(m => m.Update(It.IsAny<IssuedItem>()));
-
-            controller.Edit(accessionRecords[0]);
-            mock.Verify(m => m.Update(It.IsAny<IssuedItem>()), Times.Once);
+            // Please see the Edit method, Obsolete Attribute.
         }
 
         /// <summary>
@@ -216,11 +208,13 @@ viewResult.Model;
         {
             dynamic controller = new IssuedItemsController(mock.Object);
             mock.Setup(m => m.Update(It.IsAny<IssuedItem>()));
+            mock.Setup(m => m.GetById(It.IsAny<int>())).Returns(issuedItems[0]);
 
             var result = controller.SetReturned(id: 1) as RedirectToRouteResult;
 
             mock.Verify(m => m.Update(It.IsAny<IssuedItem>()), Times.Once);
             Assert.AreEqual("Details", result.RouteValues["action"]);
+            Assert.AreEqual(issuedItems[0].IssuedItemId, result.RouteValues["id"]);
         }
 
         /// <summary>
@@ -232,6 +226,7 @@ viewResult.Model;
         {
             dynamic controller = new IssuedItemsController(mock.Object);
             mock.Setup(m => m.Update(It.IsAny<IssuedItem>()));
+            mock.Setup(m => m.GetById(It.IsAny<int>())).Returns(issuedItems[0]);
 
             var result = controller.SetDateReturned(id: 1) as RedirectToRouteResult;
 
@@ -248,6 +243,7 @@ viewResult.Model;
         {
             dynamic controller = new IssuedItemsController(mock.Object);
             mock.Setup(m => m.Update(It.IsAny<IssuedItem>()));
+            mock.Setup(m => m.GetById(It.IsAny<int>())).Returns(issuedItems[0]);
 
             var result = controller.SetDateReturned(id: 1) as RedirectToRouteResult;
 
