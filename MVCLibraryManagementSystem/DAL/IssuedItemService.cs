@@ -63,8 +63,7 @@ namespace MVCLibraryManagementSystem.DAL
 
         public Models.IssuedItem GetById(int? id)
         {
-            throw new NotImplementedException();
-            
+            return dbcontext.IssuedItems.Find(id);
         }
 
 
