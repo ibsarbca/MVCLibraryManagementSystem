@@ -98,7 +98,7 @@ namespace MVCLibraryManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IssuedItemId,IssueDate,LateFeePerDay,Member")] IssuedItem issuedItem)
+        public ActionResult Create([Bind(Include = "IssuedItemId,IssueDate,LateFeePerDay,Member,AccessionRecord")] IssuedItem issuedItem)
         {
             if (ModelState.IsValid)
             {
