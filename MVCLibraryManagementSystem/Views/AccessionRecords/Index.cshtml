@@ -12,9 +12,14 @@
 <div class="row">
     <div class="col-md-4">
         <div class="input-group">
-            <input type="text" class="form-control" name="search" />
             <span class="input-group-btn">
-                <button type="submit" class="btn btn-primary">GO</button>
+                @using (Html.BeginForm("Index", "AccessionRecords", FormMethod.Get))
+                {
+                    <p>
+                        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                        <input type="submit" value="Search" />
+                    </p>
+                }
             </span>
         </div>
     </div>
@@ -57,29 +62,32 @@
             <th></th>
         </tr>
 
-        @foreach (var item in Model)
+        @foreach (var ar in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.AccessionRecordId)
+                    @Html.DisplayFor(modelItem => ar.AccessionRecordId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Item.Title)
+                    @Html.DisplayFor(modelItem => ar.Item.Title)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DateOfReceipt)
+                    @Html.DisplayFor(modelItem => ar.DateOfReceipt)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Source)
+                    @Html.DisplayFor(modelItem => ar.Source)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Price)
+                    @Html.DisplayFor(modelItem => ar.Price)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.AccessionRecordId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.AccessionRecordId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.AccessionRecordId })
-                </td>
+                    @Html.ActionLink("Edit", "Edit", new { id = ar.AccessionRecordId }) |
+                    @Html.ActionLink("Details", "Details", new { id = ar.AccessionRecordId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = ar.AccessionRecordId }) |
+             
+                    @Html.ActionLink("Issue Item", "Create", "IssuedItems", new { itemid = ar.Item.ItemId }, null)
+              
+                </td>   
             </tr>
         }
 
