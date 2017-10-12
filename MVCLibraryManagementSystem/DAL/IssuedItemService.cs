@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MVCLibraryManagementSystem.Models;
+using System.Diagnostics;
 
 namespace MVCLibraryManagementSystem.DAL
 {
@@ -88,6 +89,34 @@ namespace MVCLibraryManagementSystem.DAL
             int randomIndex = rnd.Next(0, maxRecords);
             AccessionRecord retval = list.ElementAt(randomIndex);
             return retval;
+        }
+
+        public DateTime GetDueDate(IssuedItem issuedItem)
+        {
+            DateTime retval = DateTime.Now;
+
+            if(issuedItem.Member.MemberType == MEMBERTYPE.FACULTY)
+            {
+                retval = issuedItem.IssueDate.AddDays(90).Date;
+            }
+            else if(issuedItem.Member.MemberType == MEMBERTYPE.STUDENT)
+            {
+                retval = issuedItem.IssueDate.AddDays(7).Date;
+            }
+            return retval;
+        }
+
+        public int GetLateFee(IssuedItem issuedItem)
+        {
+            DateTime currentDate = DateTime.Now.Date;
+
+            DateTime dueDate = GetDueDate(issuedItem);
+            
+            int i = currentDate.Subtract(dueDate).Days;
+
+            Debug.WriteLine(GetDueDate(issuedItem).ToString("dd/MM/yyyy"));
+
+            return i * issuedItem.LateFeePerDay;
         }
 
         public void Dispose()
